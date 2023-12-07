@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://8bvjiilmra5d"]
+
+[ext_resource type="Script" path="res://Mob.gd" id="1_1imnv"]
+[ext_resource type="Texture2D" uid="uid://jmyh2aq3jfeg" path="res://art/enemyFlyingAlt_1.png" id="2_qjmn0"]
+[ext_resource type="Texture2D" uid="uid://b5i8bgctds7hq" path="res://art/enemyFlyingAlt_2.png" id="3_mrlf3"]
+[ext_resource type="Texture2D" uid="uid://o78tpjcan0ta" path="res://art/enemySwimming_1.png" id="4_tqcgg"]
+[ext_resource type="Texture2D" uid="uid://cwjm3sd1ps4kv" path="res://art/enemySwimming_2.png" id="5_8cmuw"]
+[ext_resource type="Texture2D" uid="uid://crt0ueuaqbswb" path="res://art/enemyWalking_1.png" id="6_qaln6"]
+[ext_resource type="Texture2D" uid="uid://dhj5onnj0dhrd" path="res://art/enemyWalking_2.png" id="7_uiixu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1c7sv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qjmn0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_mrlf3")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_tqcgg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_8cmuw")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_qaln6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_uiixu")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 3.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bhi5e"]
+radius = 37.0
+height = 106.0
+
+[node name="Mob" type="RigidBody2D" groups=["mobs"]]
+position = Vector2(1, 0)
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_1imnv")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_1c7sv")
+animation = &"swim"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_bhi5e")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0, 2)
